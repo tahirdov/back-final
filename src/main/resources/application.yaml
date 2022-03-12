@@ -1,0 +1,35 @@
+server:
+  port: 8080
+  error:
+    include-stacktrace: always
+spring:
+  application:
+    name: /back-final
+  main:
+    banner-mode: off
+  datasource:
+    url: jdbc:mysql://back-instance.cqqytin26req.us-west-2.rds.amazonaws.com:3306/users?user=back&password=back1996
+    username: back
+    password: back1996
+  jpa:
+    hibernate:
+      ddl-auto: update
+  liquibase:
+    change-log: db/changelog-master.yml
+
+management:
+  server:
+    port: ${MANAGEMENT_SERVER_PORT:8081}
+  endpoints:
+    web:
+      exposure:
+        include: info, health
+    enabled-by-default: true
+  endpoint:
+    health:
+      show-details: always
+      enabled: true
+    metrics:
+      enabled: false
+    info:
+      enabled: true
