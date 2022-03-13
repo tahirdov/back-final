@@ -18,7 +18,7 @@ pipeline {
         stage('Build Image') {
             steps {
                  script {
-                     sh 'mvn clean install && docker build -t orkhan2000/phone-app-backend .'
+                     sh 'mvn clean install && docker build -t tahirdov/phone-app-backend .'
                  }
             }
         }
@@ -26,9 +26,9 @@ pipeline {
             steps {
                  script {
                      withCredentials([string(credentialsId: 'Docker-Hub-Password', variable: 'dockerhubpwd')]) {
-                         sh 'docker login -u orkhan2000 -p ${dockerhubpwd}'
+                         sh 'docker login -u tahirdov -p ${dockerhubpwd}'
                      }
-                     sh 'docker push  orkhan2000/phone-app-backend'
+                     sh 'docker push  tahirdov/phone-app-backend'
                  }
             }
         }
