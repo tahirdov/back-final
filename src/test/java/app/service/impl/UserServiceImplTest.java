@@ -24,8 +24,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNot.not;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RequiredArgsConstructor
 @ExtendWith({MockitoExtension.class})
@@ -44,11 +43,6 @@ public class UserServiceImplTest {
         return UserReq.builder()
                 .name("Name")
                 .phone("0123456").build();
-    }
-
-
-    private UserDto getUserDto() {
-        return new UserDto(userId, "Name", "99999999");
     }
 
     private UserEntity getNewUser() {
@@ -73,14 +67,12 @@ public class UserServiceImplTest {
     public void editUserEmpty() {
         when(repo.findCustomerById(any())).thenReturn(Optional.empty());
         Assert.assertThat(service.editUser(userId, req), is(not(equalTo(null))));
-
     }
 
     @Test
-    public void editUserSuccess() {
+    public void editUserSuccess() throws Exception {
         when(repo.findCustomerById(any())).thenReturn(Optional.of(user));
         Assert.assertThat(service.editUser(userId, req), is(not(equalTo(null))));
-
     }
 
     @Test
